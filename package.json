@@ -7,5 +7,12 @@
     "url": "https://github.com/SIROK/growthmessage-javascript"
   },
   "author": "SIROK, Inc.",
-  "license": "ISC"
+  "dependencies": {
+    "grunt": "^0.4.5"
+  },
+  "devDependencies": {
+    "grunt-typescript": "^0.6.1",
+    "load-grunt-tasks": "^3.1.0",
+    "typescript": "^1.4.1"
+  }
 }
