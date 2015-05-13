@@ -12,6 +12,10 @@ module.exports = function(grunt){
                 },
             },
         },
+        tjs2GM: {
+            src: './bower_components/t.js/t.min.js',
+            dest: './dist/growthmessage.js',
+        },
         uglify: {
             dist: {
                 files: {
@@ -22,7 +26,7 @@ module.exports = function(grunt){
         watch: {
             scripts: {
                 files: ['./ts/*.ts'],
-                tasks: ['typescript', 'uglify'],
+                tasks: ['typescript', 'tjs2GM', 'uglify'],
                 options: {
                     spawn: false,
                 },
@@ -31,7 +35,8 @@ module.exports = function(grunt){
     });
 
     require('load-grunt-tasks')(grunt);
+    grunt.loadTasks('./tasks');
 
-    grunt.registerTask('default', ['typescript', 'uglify']);
+    grunt.registerTask('default', ['typescript', 'tjs2GM', 'uglify']);
 
 };
