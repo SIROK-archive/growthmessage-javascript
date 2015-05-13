@@ -2,10 +2,25 @@ module.exports = function(grunt){
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        typescript: {
+            base: {
+                src: ['./ts/*.ts'],
+                dest: './growthmessage.js'
+            }
+        },
+        watch: {
+            scripts: {
+                files: ['./ts/*.ts'],
+                tasks: ['typescript'],
+                options: {
+                    spawn: false,
+                },
+            }
+        },
     });
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('default', ['']);
+    grunt.registerTask('default', ['typescript']);
 
 };
