@@ -1,0 +1,16 @@
+{
+  "name": "growthmessage-javascript",
+  "version": "0.0.1",
+  "homepage": "https://github.com/SIROK/growthmessage-javascript",
+  "authors": "SIROK, Ink.",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "t.js": "git@github.com:jasonmoo/t.js.git"
+  }
+}
