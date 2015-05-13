@@ -5,7 +5,7 @@ module.exports = function(grunt){
         typescript: {
             base: {
                 src: ['./ts/*.ts'],
-                dest: './growthmessage.js',
+                dest: './dist/growthmessage.js',
                 options: {
                     sourceMap: true,
                     declaration: false,
@@ -14,13 +14,8 @@ module.exports = function(grunt){
         },
         uglify: {
             dist: {
-                options: {
-                    sourceMapIn: './growthmessage.js.map',
-                    sourceMap: './growthmessage.min.js.map',
-                    sourceMapRoot: './ts/'
-                },
                 files: {
-                    './growthmessage.min.js': ['./growthmessage.js']
+                    './dist/growthmessage.min.js': ['./dist/growthmessage.js']
                 }
             }
         },
