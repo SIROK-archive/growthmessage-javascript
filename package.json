@@ -1,0 +1,11 @@
+{
+  "name": "growthmessage-javascript",
+  "version": "0.0.1",
+  "description": "Growth Message SDK for JavaScript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SIROK/growthmessage-javascript"
+  },
+  "author": "SIROK, Inc.",
+  "license": "ISC"
+}
