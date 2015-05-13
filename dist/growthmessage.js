@@ -165,3 +165,13 @@ var GrowthMessage;
     GrowthMessage.UserAgent = UserAgent;
 })(GrowthMessage || (GrowthMessage = {}));
 //# sourceMappingURL=growthmessage.js.map
+if(GrowthMessage.module){
+GrowthMessage.module.exports('dialog-image', '<div class="growthmessage-dialog-image">
+    
+</div>
+');
+GrowthMessage.module.exports('dialog-text', '<div class="growthmessage-dialog-text">
+    
+</div>
+');
+}

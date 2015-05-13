@@ -16,6 +16,13 @@ module.exports = function(grunt){
             src: './bower_components/t.js/t.min.js',
             dest: './dist/growthmessage.js',
         },
+        text2GM: {
+            src: [
+                './html/dialog-image.html',
+                './html/dialog-text.html',
+            ],
+            dest: './dist/growthmessage.js',
+        },
         uglify: {
             dist: {
                 files: {
@@ -26,7 +33,7 @@ module.exports = function(grunt){
         watch: {
             scripts: {
                 files: ['./ts/*.ts'],
-                tasks: ['typescript', 'tjs2GM', 'uglify'],
+                tasks: ['typescript', 'tjs2GM', 'text2GM', 'uglify'],
                 options: {
                     spawn: false,
                 },
@@ -37,6 +44,6 @@ module.exports = function(grunt){
     require('load-grunt-tasks')(grunt);
     grunt.loadTasks('./tasks');
 
-    grunt.registerTask('default', ['typescript', 'tjs2GM', 'uglify']);
+    grunt.registerTask('default', ['typescript', 'tjs2GM', 'text2GM', 'uglify']);
 
 };
