@@ -12,10 +12,22 @@ module.exports = function(grunt){
                 },
             },
         },
+        uglify: {
+            dist: {
+                options: {
+                    sourceMapIn: './growthmessage.js.map',
+                    sourceMap: './growthmessage.min.js.map',
+                    sourceMapRoot: './ts/'
+                },
+                files: {
+                    './growthmessage.min.js': ['./growthmessage.js']
+                }
+            }
+        },
         watch: {
             scripts: {
                 files: ['./ts/*.ts'],
-                tasks: ['typescript'],
+                tasks: ['typescript', 'uglify'],
                 options: {
                     spawn: false,
                 },
@@ -25,6 +37,6 @@ module.exports = function(grunt){
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('default', ['typescript']);
+    grunt.registerTask('default', ['typescript', 'uglify']);
 
 };
