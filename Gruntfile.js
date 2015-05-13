@@ -5,8 +5,12 @@ module.exports = function(grunt){
         typescript: {
             base: {
                 src: ['./ts/*.ts'],
-                dest: './growthmessage.js'
-            }
+                dest: './growthmessage.js',
+                options: {
+                    sourceMap: true,
+                    declaration: false,
+                },
+            },
         },
         watch: {
             scripts: {
@@ -15,7 +19,7 @@ module.exports = function(grunt){
                 options: {
                     spawn: false,
                 },
-            }
+            },
         },
     });
 
