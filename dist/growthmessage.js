@@ -148,6 +148,21 @@ var GrowthMessage;
 })(GrowthMessage || (GrowthMessage = {}));
 var GrowthMessage;
 (function (GrowthMessage) {
+    var Module = (function () {
+        function Module() {
+        }
+        Module.prototype.exports = function (name, src) {
+            this[name] = src;
+        };
+        Module.prototype.require = function (name) {
+            return this[name];
+        };
+        return Module;
+    })();
+    GrowthMessage.module = new Module();
+})(GrowthMessage || (GrowthMessage = {}));
+var GrowthMessage;
+(function (GrowthMessage) {
     var Overlay = (function () {
         function Overlay() {
         }
