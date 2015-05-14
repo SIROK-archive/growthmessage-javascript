@@ -39,10 +39,16 @@ var GrowthMessage;
             this.overlay = new GrowthMessage.Overlay();
             this.userAgent = new GrowthMessage.UserAgent();
             this.id = options.id;
+            this.render();
             this.bindEvents();
         }
+        App.prototype.render = function () {
+            var el = document.createElement('div');
+            el.className = 'growthmessage';
+            document.body.appendChild(el);
+        };
         App.prototype.bindEvents = function () {
-            this.on('hook', 'open');
+            this.on('hook', 'open', this.dialog);
         };
         return App;
     })(GrowthMessage.Events);
@@ -182,6 +188,7 @@ var GrowthMessage;
     })(GrowthMessage.Events);
     GrowthMessage.Config = Config;
 })(GrowthMessage || (GrowthMessage = {}));
+/// <reference path="vender/t.d.ts" />
 /// <reference path="events.ts" />
 var GrowthMessage;
 (function (GrowthMessage) {
@@ -189,9 +196,39 @@ var GrowthMessage;
         __extends(Dialog, _super);
         function Dialog() {
             _super.call(this);
+            this.styles = {
+                '.growthmessage-dialog-text__title': {
+                    'font-size': '24px'
+                },
+                '.growthmessage-dialog-text__body': {
+                    'font-size': '16px'
+                },
+                '.growthmessage-dialog-text__button': {
+                    'width': '300px',
+                    'font-size': '16px',
+                    'color': '#fff',
+                    'background-color': '#000'
+                }
+            };
         }
         Dialog.prototype.open = function () {
-            console.log('opened!');
+            var src = GrowthMessage.module.require('dialog-text');
+            var html = new GrowthMessage.t(src).render({});
+            var parent = document.body.getElementsByClassName('growthmessage')[0];
+            parent.innerHTML = html;
+            this.setStyles();
+        };
+        Dialog.prototype.setStyles = function () {
+            var _this = this;
+            Object.keys(this.styles).forEach(function (selector) {
+                var style = _this.styles[selector];
+                var el = document.body.querySelectorAll(selector)[0];
+                if (!el)
+                    return;
+                Object.keys(style).forEach(function (key) {
+                    el.style[key] = style[key];
+                });
+            });
         };
         return Dialog;
     })(GrowthMessage.Events);
@@ -239,5 +276,5 @@ var GrowthMessage;
 
 if(GrowthMessage.module){
 GrowthMessage.module.exports("dialog-image", "<div class=\"growthmessage-dialog-image\">\n    \n</div>\n");
-GrowthMessage.module.exports("dialog-text", "<div class=\"growthmessage-dialog-text\">\n    \n</div>\n");
+GrowthMessage.module.exports("dialog-text", "<div class=\"growthmessage-dialog-text\">\n    <div class=\"growthmessage-dialog-text__title\">\n        hogehoge\n    </div>\n    <div class=\"growthmessage-dialog-text__body\">\n        fugafuga\n    </div>\n    <div class=\"growthmessage-dialog-text__button\">\n        piyopiyo\n    </div>\n</div>\n");
 }

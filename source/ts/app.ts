@@ -11,10 +11,16 @@ module GrowthMessage {
         constructor(options:{id:string}) {
             super();
             this.id = options.id;
+            this.render();
             this.bindEvents();
         }
+        render() {
+            var el = document.createElement('div');
+            el.className = 'growthmessage';
+            document.body.appendChild(el);
+        }
         bindEvents() {
-            this.on('hook', 'open');
+            this.on('hook', 'open', this.dialog);
         }
     }
 }
