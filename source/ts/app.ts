@@ -1,3 +1,5 @@
+/// <reference path="events.ts" />
+
 module GrowthMessage {
     export class App extends GrowthMessage.Events {
         id:string;
@@ -9,7 +11,10 @@ module GrowthMessage {
         constructor(options:{id:string}) {
             super();
             this.id = options.id;
-            this.on('xxxxx', function(){});
+            this.bindEvents();
+        }
+        bindEvents() {
+            this.dialog.on('click:btnOpen', this.dialog.open);
         }
     }
 }

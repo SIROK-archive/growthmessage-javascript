@@ -1,5 +1,22 @@
 var GrowthMessage;(function(window){function c(a){this.t=a}function l(a,b){for(var e=b.split(".");e.length;){if(!(e[0]in a))return!1;a=a[e.shift()]}return a}function d(a,b){return a.replace(h,function(e,a,i,f,c,h,k,m){var f=l(b,f),j="",g;if(!f)return"!"==i?d(c,b):k?d(m,b):"";if(!i)return d(h,b);if("@"==i){e=b._key;a=b._val;for(g in f)f.hasOwnProperty(g)&&(b._key=g,b._val=f[g],j+=d(c,b));b._key=e;b._val=a;return j}}).replace(k,function(a,c,d){return(a=l(b,d))||0===a?"%"==c?(new Option(a)).innerHTML.replace(/"/g,"&quot;"):
 a:""})}var h=/\{\{(([@!]?)(.+?))\}\}(([\s\S]+?)(\{\{:\1\}\}([\s\S]+?))?)\{\{\/\1\}\}/g,k=/\{\{([=%])(.+?)\}\}/g;c.prototype.render=function(a){return d(this.t,a)};window.t=c})(GrowthMessage || (GrowthMessage = {}));
+var GrowthMessage;
+(function (GrowthMessage) {
+    var Events = (function () {
+        function Events() {
+            this.events = {};
+        }
+        Events.prototype.on = function (event, callback) {
+            this.events[event] = callback;
+        };
+        Events.prototype.trigger = function (event, arg) {
+            this.events[event](arg);
+        };
+        return Events;
+    })();
+    GrowthMessage.Events = Events;
+})(GrowthMessage || (GrowthMessage = {}));
+/// <reference path="events.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -17,19 +34,22 @@ var GrowthMessage;
             this.overlay = new GrowthMessage.Overlay();
             this.userAgent = new GrowthMessage.UserAgent();
             this.id = options.id;
-            this.on('xxxxx', function () {
-            });
+            this.bindEvents();
         }
+        App.prototype.bindEvents = function () {
+            this.dialog.on('click:btnOpen', this.dialog.open);
+        };
         return App;
     })(GrowthMessage.Events);
     GrowthMessage.App = App;
 })(GrowthMessage || (GrowthMessage = {}));
+/// <reference path="events.ts" />
 var GrowthMessage;
 (function (GrowthMessage) {
     var Config = (function (_super) {
         __extends(Config, _super);
         function Config() {
-            _super.apply(this, arguments);
+            _super.call(this);
             this.data = {
                 "created": "2015-05-09T10:56:06+0000",
                 "eventId": "Event:P5C3vzoLOEijnlVj:Default:Open",
@@ -157,32 +177,20 @@ var GrowthMessage;
     })(GrowthMessage.Events);
     GrowthMessage.Config = Config;
 })(GrowthMessage || (GrowthMessage = {}));
+/// <reference path="events.ts" />
 var GrowthMessage;
 (function (GrowthMessage) {
     var Dialog = (function (_super) {
         __extends(Dialog, _super);
         function Dialog() {
-            _super.apply(this, arguments);
+            _super.call(this);
         }
+        Dialog.prototype.open = function () {
+            console.log('opened!');
+        };
         return Dialog;
     })(GrowthMessage.Events);
     GrowthMessage.Dialog = Dialog;
-})(GrowthMessage || (GrowthMessage = {}));
-var GrowthMessage;
-(function (GrowthMessage) {
-    var Events = (function () {
-        function Events() {
-            this.events = {};
-        }
-        Events.prototype.on = function (event, callback) {
-            this.events[event] = callback;
-        };
-        Events.prototype.trigger = function (event, arg) {
-            this.events[event](arg);
-        };
-        return Events;
-    })();
-    GrowthMessage.Events = Events;
 })(GrowthMessage || (GrowthMessage = {}));
 var GrowthMessage;
 (function (GrowthMessage) {
@@ -199,23 +207,25 @@ var GrowthMessage;
     })();
     GrowthMessage.module = new Module();
 })(GrowthMessage || (GrowthMessage = {}));
+/// <reference path="events.ts" />
 var GrowthMessage;
 (function (GrowthMessage) {
     var Overlay = (function (_super) {
         __extends(Overlay, _super);
         function Overlay() {
-            _super.apply(this, arguments);
+            _super.call(this);
         }
         return Overlay;
     })(GrowthMessage.Events);
     GrowthMessage.Overlay = Overlay;
 })(GrowthMessage || (GrowthMessage = {}));
+/// <reference path="events.ts" />
 var GrowthMessage;
 (function (GrowthMessage) {
     var UserAgent = (function (_super) {
         __extends(UserAgent, _super);
         function UserAgent() {
-            _super.apply(this, arguments);
+            _super.call(this);
         }
         return UserAgent;
     })(GrowthMessage.Events);

@@ -1,3 +1,5 @@
+/// <reference path="events.ts" />
+
 module GrowthMessage {
     export class Config extends GrowthMessage.Events {
         private data:Object = {
@@ -119,6 +121,9 @@ module GrowthMessage {
                 "extension": "png"
             }
         };
+        constructor(){
+            super();
+        }
         get(){
             return this.data;
         }
