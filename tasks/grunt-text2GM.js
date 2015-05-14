@@ -3,9 +3,9 @@ module.exports = function(grunt) {
     grunt.registerTask('text2GM', function(){
         var config = grunt.config('text2GM');
         var modules = config.src.map(function(src){
-            var text = grunt.file.read(src).replace(/'/g, "\'");
+            var text = JSON.stringify(grunt.file.read(src));
             var fileName = src.match(/\/([^\/]+?)\.html$/)[1];
-            text = "GrowthMessage.module.exports('" + fileName + "', '" + text + "');\n";
+            text = "GrowthMessage.module.exports(\"" + fileName + "\", " + text + ");\n";
             return text;
         }).join('');
         var dest = grunt.file.read(config.dest);
