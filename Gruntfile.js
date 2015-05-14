@@ -7,7 +7,7 @@ module.exports = function(grunt){
                 src: ['./ts/*.ts'],
                 dest: './dist/growthmessage.js',
                 options: {
-                    sourceMap: true,
+                    sourceMap: false,
                     declaration: false,
                 },
             },
