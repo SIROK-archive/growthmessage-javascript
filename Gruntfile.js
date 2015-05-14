@@ -18,6 +18,7 @@ module.exports = function(grunt){
         },
         text2GM: {
             src: [
+                './source/css/styles.css',
                 './source/html/dialog-image.html',
                 './source/html/dialog-text.html',
             ],

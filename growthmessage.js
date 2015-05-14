@@ -44,12 +44,21 @@ var GrowthMessage;
                 return;
             this.id = options.id;
             this.render();
+            this.setStyles();
             this.bindEvents();
         }
         App.prototype.render = function () {
             var el = document.createElement('div');
             el.className = 'growthmessage';
             document.body.appendChild(el);
+            this.el = document.body.getElementsByClassName(el.className)[0];
+        };
+        App.prototype.setStyles = function () {
+            var styles = GrowthMessage.module.require('styles.css');
+            var el = document.createElement('style');
+            el.type = 'text/css';
+            el.innerHTML = styles;
+            document.getElementsByTagName('head')[0].appendChild(el);
         };
         App.prototype.bindEvents = function () {
             this.on('hook', 'open', this.dialog);
@@ -200,96 +209,17 @@ var GrowthMessage;
         __extends(Dialog, _super);
         function Dialog() {
             _super.call(this);
-            this.styles = {
-                '.growthmessage-dialog': {
-                    'position': 'absolute',
-                    'top': '0px',
-                    'left': '0px',
-                    'width': '100%',
-                    'height': '100%',
-                    'display': 'table',
-                    'background-color': 'rgba(0,0,0,0.9)'
-                },
-                '.growthmessage-dialog__margin-left': {
-                    'display': 'table-cell',
-                    'width': '7.5%'
-                },
-                '.growthmessage-dialog__margin-right': {
-                    'display': 'table-cell',
-                    'width': '7.5%'
-                },
-                '.growthmessage-dialog__inner': {
-                    'display': 'table-cell',
-                    'width': '85%',
-                    'vertical-align': 'middle'
-                },
-                '.growthmessage-dialog__contents': {
-                    'display': 'table',
-                    'table-layout': 'fixed',
-                    'box-sizing': 'border-box',
-                    'overflow': 'hidden',
-                    'width': '100%',
-                    'background-color': '#eaeaea',
-                    'border-top': '1px solid #fff',
-                    'border-radius': '10px'
-                },
-                '.growthmessage-dialog-text__title': {
-                    'margin': '21px 14px 7px 14px',
-                    'text-align': 'center',
-                    'word-wrap': 'break-word',
-                    'line-height': '42px',
-                    'font-size': '28px'
-                },
-                '.growthmessage-dialog-text__body': {
-                    'margin': '7px 28px 28px 28px',
-                    'text-align': 'center',
-                    'word-wrap': 'break-word',
-                    'line-height': '33px',
-                    'font-size': '22px'
-                },
-                '.growthmessage-dialog-text__buttons': {
-                    'display': 'table',
-                    'width': '100%',
-                    'border-top': '1px solid #b4b4b4'
-                },
-                '.growthmessage-dialog-text__button': {
-                    'display': 'table-cell',
-                    'box-sizing': 'border-box',
-                    'padding': '14px 7px',
-                    'text-align': 'center',
-                    'vertical-align': 'middle',
-                    'word-wrap': 'break-word',
-                    'font-size': '16px',
-                    'color': '#1678e5'
-                }
-            };
         }
         Dialog.prototype.open = function () {
             this.parentElement = document.body.getElementsByClassName('growthmessage')[0];
-            this.render('dialog-text', {
+            this.render(GrowthMessage.module.require('dialog-text.html'), {
                 title: 'hogehoge',
                 body: 'fugafugafugafugafugafugafugafuga'
             });
-            this.setStyles(this.styles);
         };
-        Dialog.prototype.render = function (moduleName, data) {
-            var src = GrowthMessage.module.require(moduleName);
-            var html = new GrowthMessage.t(src).render(data);
+        Dialog.prototype.render = function (template, data) {
+            var html = new GrowthMessage.t(template).render(data);
             this.parentElement.innerHTML = html;
-        };
-        Dialog.prototype.setStyles = function (styles) {
-            var _this = this;
-            Object.keys(styles).forEach(function (selector) {
-                var style = styles[selector];
-                var els = _this.parentElement.querySelectorAll(selector);
-                if (!els)
-                    return;
-                [].slice.call(els).forEach(function (el) {
-                    Object.keys(style).forEach(function (key) {
-                        el.style[key] = style[key];
-                    });
-                });
-            });
         };
         return Dialog;
     })(GrowthMessage.Events);
@@ -344,6 +274,7 @@ var GrowthMessage;
 })(GrowthMessage || (GrowthMessage = {}));
 
 if(GrowthMessage.module){
-GrowthMessage.module.exports("dialog-image", "<div class=\"growthmessage-dialog-image\">\n    \n</div>\n");
-GrowthMessage.module.exports("dialog-text", "<div class=\"growthmessage-dialog\">\n    <div class=\"growthmessage-dialog__margin-left\"></div>\n    <div class=\"growthmessage-dialog__inner\">\n        <div class=\"growthmessage-dialog__contents\">\n            <div class=\"growthmessage-dialog-text__title\">\n                {{=title}}\n            </div>\n            <div class=\"growthmessage-dialog-text__body\">\n                {{%body}}\n            </div>\n            <div class=\"growthmessage-dialog-text__buttons\">\n                <div class=\"growthmessage-dialog-text__button\">\n                    piyopiyo\n                </div>\n                <div class=\"growthmessage-dialog-text__button\">\n                    piyopiyo\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"growthmessage-dialog__margin-right\"></div>\n</div>\n");
+GrowthMessage.module.exports("styles.css", ".growthmessage-dialog {\n    position : absolute;\n    top : 0px;\n    left : 0px;\n    width : 100%;\n    height : 100%;\n    display : table;\n    background-color : rgba(0,0,0,0.9);\n}\n.growthmessage-dialog__margin-left {\n    display : table-cell;\n    width : 7.5%\n}\n.growthmessage-dialog__margin-right {\n    display : table-cell;\n    width : 7.5%\n}\n.growthmessage-dialog__inner {\n    display : table-cell;\n    width : 85%;\n    vertical-align : middle;\n}\n.growthmessage-dialog__contents {\n    display : table;\n    table-layout : fixed;\n    box-sizing : border-box;\n    overflow : hidden;\n    width : 100%;\n    background-color : #eaeaea;\n    border-top : 1px solid #fff;\n    border-radius : 10px;\n}\n.growthmessage-dialog-text__title {\n    margin : 21px 14px 7px 14px;\n    text-align : center;\n    word-wrap : break-word;\n    line-height : 42px;\n    font-size : 28px;\n}\n.growthmessage-dialog-text__body {\n    margin : 7px 28px 28px 28px;\n    text-align : center;\n    word-wrap : break-word;\n    line-height : 33px;\n    font-size : 22px;\n}\n.growthmessage-dialog-text__buttons {\n    display : table;\n    width : 100%;\n    border-top : 1px solid #b4b4b4;\n}\n.growthmessage-dialog-text__button {\n    display : table-cell;\n    box-sizing : border-box;\n    padding : 14px 7px;\n    text-align : center;\n    vertical-align : middle;\n    word-wrap : break-word;\n    font-size : 16px;\n    color : #1678e5;\n}\n");
+GrowthMessage.module.exports("dialog-image.html", "<div class=\"growthmessage-dialog-image\">\n    \n</div>\n");
+GrowthMessage.module.exports("dialog-text.html", "<div class=\"growthmessage-dialog\">\n    <div class=\"growthmessage-dialog__margin-left\"></div>\n    <div class=\"growthmessage-dialog__inner\">\n        <div class=\"growthmessage-dialog__contents\">\n            <div class=\"growthmessage-dialog-text__title\">\n                {{=title}}\n            </div>\n            <div class=\"growthmessage-dialog-text__body\">\n                {{%body}}\n            </div>\n            <div class=\"growthmessage-dialog-text__buttons\">\n                <div class=\"growthmessage-dialog-text__button\">\n                    piyopiyo\n                </div>\n                <div class=\"growthmessage-dialog-text__button\">\n                    piyopiyo\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"growthmessage-dialog__margin-right\"></div>\n</div>\n");
 }
