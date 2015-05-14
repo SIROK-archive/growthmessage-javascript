@@ -5,7 +5,7 @@ module.exports = function(grunt){
         typescript: {
             base: {
                 src: ['./ts/*.ts'],
-                dest: './dist/growthmessage.js',
+                dest: './growthmessage.js',
                 options: {
                     sourceMap: false,
                     declaration: false,
@@ -14,19 +14,19 @@ module.exports = function(grunt){
         },
         tjs2GM: {
             src: './bower_components/t.js/t.min.js',
-            dest: './dist/growthmessage.js',
+            dest: './growthmessage.js',
         },
         text2GM: {
             src: [
                 './html/dialog-image.html',
                 './html/dialog-text.html',
             ],
-            dest: './dist/growthmessage.js',
+            dest: './growthmessage.js',
         },
         uglify: {
             dist: {
                 files: {
-                    './dist/growthmessage.min.js': ['./dist/growthmessage.js']
+                    './growthmessage.min.js': ['./growthmessage.js']
                 }
             }
         },
