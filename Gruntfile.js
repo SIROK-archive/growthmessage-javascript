@@ -4,7 +4,7 @@ module.exports = function(grunt){
         pkg: grunt.file.readJSON('package.json'),
         typescript: {
             base: {
-                src: ['./ts/*.ts'],
+                src: ['./source/ts/*.ts'],
                 dest: './growthmessage.js',
                 options: {
                     sourceMap: false,
@@ -18,8 +18,8 @@ module.exports = function(grunt){
         },
         text2GM: {
             src: [
-                './html/dialog-image.html',
-                './html/dialog-text.html',
+                './source/html/dialog-image.html',
+                './source/html/dialog-text.html',
             ],
             dest: './growthmessage.js',
         },
