@@ -21,15 +21,18 @@ module GrowthMessage {
             super();
         }
         open() {
-            var src = GrowthMessage.module.require('dialog-text');
-            var html = new GrowthMessage.t(src).render({});
+            this.render('dialog-text', {});
+            this.setStyles(this.styles);
+        }
+        render(moduleName:string, data:{}) {
+            var src = GrowthMessage.module.require(moduleName);
+            var html = new GrowthMessage.t(src).render(data);
             var parent:any = document.body.getElementsByClassName('growthmessage')[0];
             parent.innerHTML = html;
-            this.setStyles();
         }
-        setStyles() {
-            Object.keys(this.styles).forEach((selector)=>{
-                var style = this.styles[selector];
+        setStyles(styles:{}) {
+            Object.keys(styles).forEach((selector)=>{
+                var style = styles[selector];
                 var el:any = document.body.querySelectorAll(selector)[0];
                 if(!el) return;
                 Object.keys(style).forEach((key)=>{

@@ -212,16 +212,18 @@ var GrowthMessage;
             };
         }
         Dialog.prototype.open = function () {
-            var src = GrowthMessage.module.require('dialog-text');
-            var html = new GrowthMessage.t(src).render({});
+            this.render('dialog-text', {});
+            this.setStyles(this.styles);
+        };
+        Dialog.prototype.render = function (moduleName, data) {
+            var src = GrowthMessage.module.require(moduleName);
+            var html = new GrowthMessage.t(src).render(data);
             var parent = document.body.getElementsByClassName('growthmessage')[0];
             parent.innerHTML = html;
-            this.setStyles();
         };
-        Dialog.prototype.setStyles = function () {
-            var _this = this;
-            Object.keys(this.styles).forEach(function (selector) {
-                var style = _this.styles[selector];
+        Dialog.prototype.setStyles = function (styles) {
+            Object.keys(styles).forEach(function (selector) {
+                var style = styles[selector];
                 var el = document.body.querySelectorAll(selector)[0];
                 if (!el)
                     return;
