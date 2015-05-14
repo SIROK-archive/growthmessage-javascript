@@ -2,11 +2,16 @@ module GrowthMessage {
     export class Events {
         events = {};
 
-        on(event:string, callback:Function){
-            this.events[event] = callback;
+        on(eventName:string, callbackName:string, thisArg?:any){
+            this.events[eventName] = {
+                callbackName : callbackName,
+                thisArg : thisArg
+            };
         }
-        trigger(event:string, arg:any){
-            this.events[event](arg);
+        trigger(eventName:string, arg?:any){
+            var event = this.events[eventName];
+            var thisArg = event.thisArg ? event.thisArg : this;
+            thisArg[event.callbackName](arg);
         }
     }
 }

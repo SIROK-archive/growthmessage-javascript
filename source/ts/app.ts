@@ -14,7 +14,7 @@ module GrowthMessage {
             this.bindEvents();
         }
         bindEvents() {
-            this.dialog.on('click:btnOpen', this.dialog.open);
+            this.on('hook', 'open');
         }
     }
 }

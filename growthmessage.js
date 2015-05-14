@@ -6,11 +6,16 @@ var GrowthMessage;
         function Events() {
             this.events = {};
         }
-        Events.prototype.on = function (event, callback) {
-            this.events[event] = callback;
+        Events.prototype.on = function (eventName, callbackName, thisArg) {
+            this.events[eventName] = {
+                callbackName: callbackName,
+                thisArg: thisArg
+            };
         };
-        Events.prototype.trigger = function (event, arg) {
-            this.events[event](arg);
+        Events.prototype.trigger = function (eventName, arg) {
+            var event = this.events[eventName];
+            var thisArg = event.thisArg ? event.thisArg : this;
+            thisArg[event.callbackName](arg);
         };
         return Events;
     })();
@@ -37,7 +42,7 @@ var GrowthMessage;
             this.bindEvents();
         }
         App.prototype.bindEvents = function () {
-            this.dialog.on('click:btnOpen', this.dialog.open);
+            this.on('hook', 'open');
         };
         return App;
     })(GrowthMessage.Events);
