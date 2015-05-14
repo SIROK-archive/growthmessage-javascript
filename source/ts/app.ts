@@ -10,6 +10,7 @@ module GrowthMessage {
 
         constructor(options:{id:string}) {
             super();
+            if(!this.userAgent.isViewable()) return;
             this.id = options.id;
             this.render();
             this.bindEvents();

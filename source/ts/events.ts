@@ -10,6 +10,7 @@ module GrowthMessage {
         }
         trigger(eventName:string, arg?:any){
             var event = this.events[eventName];
+            if(!event) return;
             var thisArg = event.thisArg ? event.thisArg : this;
             thisArg[event.callbackName](arg);
         }

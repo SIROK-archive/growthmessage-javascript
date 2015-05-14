@@ -14,6 +14,8 @@ var GrowthMessage;
         };
         Events.prototype.trigger = function (eventName, arg) {
             var event = this.events[eventName];
+            if (!event)
+                return;
             var thisArg = event.thisArg ? event.thisArg : this;
             thisArg[event.callbackName](arg);
         };
@@ -38,6 +40,8 @@ var GrowthMessage;
             this.dialog = new GrowthMessage.Dialog();
             this.overlay = new GrowthMessage.Overlay();
             this.userAgent = new GrowthMessage.UserAgent();
+            if (!this.userAgent.isViewable())
+                return;
             this.id = options.id;
             this.render();
             this.bindEvents();
@@ -270,7 +274,15 @@ var GrowthMessage;
         __extends(UserAgent, _super);
         function UserAgent() {
             _super.call(this);
+            this.UA = window.navigator.userAgent.toLowerCase();
         }
+        UserAgent.prototype.isViewable = function () {
+            var _this = this;
+            var is = function (text) {
+                return _this.UA.indexOf(text) != -1;
+            };
+            return (is('iphone os 6_') || is('iphone os 7_') || is('iphone os 8_') || is('iphone os 9_') || is('iphone os 10_') || (is('android 4.') && is('mobile safari')) || (is('android 5.') && is('mobile safari')) || (is('android 6.') && is('mobile safari')));
+        };
         return UserAgent;
     })(GrowthMessage.Events);
     GrowthMessage.UserAgent = UserAgent;
