@@ -1,5 +1,5 @@
 module GrowthMessage {
-    export class UserAgent {
+    export class UserAgent extends GrowthMessage.Events {
 
     }
 }

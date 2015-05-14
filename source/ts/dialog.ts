@@ -1,5 +1,5 @@
 module GrowthMessage {
-    export class Dialog {
+    export class Dialog extends GrowthMessage.Events {
 
     }
 }

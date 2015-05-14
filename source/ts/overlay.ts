@@ -1,5 +1,5 @@
 module GrowthMessage {
-    export class Overlay {
+    export class Overlay extends GrowthMessage.Events {
 
     }
 }

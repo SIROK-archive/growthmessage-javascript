@@ -1,5 +1,5 @@
 module GrowthMessage {
-    export class Config {
+    export class Config extends GrowthMessage.Events {
         private data:Object = {
             "created": "2015-05-09T10:56:06+0000",
             "eventId": "Event:P5C3vzoLOEijnlVj:Default:Open",
