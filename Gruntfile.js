@@ -32,7 +32,7 @@ module.exports = function(grunt){
         },
         watch: {
             scripts: {
-                files: ['./ts/*.ts'],
+                files: ['./source/ts/*.ts'],
                 tasks: ['typescript', 'tjs2GM', 'text2GM', 'uglify'],
                 options: {
                     spawn: false,
