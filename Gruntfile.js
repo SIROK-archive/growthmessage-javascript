@@ -2,6 +2,14 @@ module.exports = function(grunt){
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        connect: {
+            site: {
+                options: {
+                    hostname: '*',
+                    port: 55469,
+                },
+            },
+        },
         sass: {
             dist: {
                 options: {
@@ -52,7 +60,7 @@ module.exports = function(grunt){
             }
         },
         watch: {
-            scripts: {
+            all: {
                 files: [
                     './source/ts/*.ts',
                     './source/html/*.html',
@@ -60,6 +68,7 @@ module.exports = function(grunt){
                 ],
                 tasks: ['sass', 'typescript', 'tjs2GM', 'nanoajax2GM', 'text2GM', 'uglify'],
                 options: {
+                    livereload: true,
                     spawn: false,
                 },
             },
@@ -69,6 +78,7 @@ module.exports = function(grunt){
     require('load-grunt-tasks')(grunt);
     grunt.loadTasks('./tasks');
 
+    grunt.registerTask('dev', ['connect', 'watch']);
     grunt.registerTask('default', ['sass', 'typescript', 'tjs2GM', 'nanoajax2GM', 'text2GM', 'uglify']);
 
 };
