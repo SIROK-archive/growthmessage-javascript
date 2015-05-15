@@ -11,6 +11,7 @@
     "tests"
   ],
   "dependencies": {
-    "t.js": "git@github.com:jasonmoo/t.js.git"
+    "t.js": "git@github.com:jasonmoo/t.js.git",
+    "pegasus": "~0.3.1"
   }
 }

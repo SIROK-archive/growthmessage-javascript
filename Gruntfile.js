@@ -32,6 +32,10 @@ module.exports = function(grunt){
             src: './bower_components/t.js/t.min.js',
             dest: './growthmessage.js',
         },
+        pegasus2GM: {
+            src: './bower_components/pegasus/dist/pegasus.min.js',
+            dest: './growthmessage.js',
+        },
         text2GM: {
             src: [
                 './source/css/styles.css',
@@ -65,6 +69,6 @@ module.exports = function(grunt){
     require('load-grunt-tasks')(grunt);
     grunt.loadTasks('./tasks');
 
-    grunt.registerTask('default', ['sass', 'typescript', 'tjs2GM', 'text2GM', 'uglify']);
+    grunt.registerTask('default', ['sass', 'typescript', 'tjs2GM', 'pegasus2GM', 'text2GM', 'uglify']);
 
 };
