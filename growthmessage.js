@@ -163,6 +163,7 @@ var GrowthMessage;
             this.setElement();
             this.fitOverlay();
             this.fitDialog();
+            this.scaleDialog();
         };
         Dialog.prototype.render = function (data) {
             var template = GrowthMessage.module.require(this.templates[data.type]);
@@ -190,15 +191,32 @@ var GrowthMessage;
         };
         Dialog.prototype.fitOverlay = function () {
             var D = document;
-            this.el.style.width = Math.max(D.body.scrollWidth, D.documentElement.scrollWidth, D.body.offsetWidth, D.documentElement.offsetWidth, D.body.clientWidth, D.documentElement.clientWidth) + 'px';
-            this.el.style.height = Math.max(D.body.scrollHeight, D.documentElement.scrollHeight, D.body.offsetHeight, D.documentElement.offsetHeight, D.body.clientHeight, D.documentElement.clientHeight) + 'px';
+            this.el.width = Math.max(D.body.scrollWidth, D.documentElement.scrollWidth, D.body.offsetWidth, D.documentElement.offsetWidth, D.body.clientWidth, D.documentElement.clientWidth);
+            this.el.style.width = this.el.width + 'px';
+            this.el.height = Math.max(D.body.scrollHeight, D.documentElement.scrollHeight, D.body.offsetHeight, D.documentElement.offsetHeight, D.body.clientHeight, D.documentElement.clientHeight);
+            this.el.style.height = this.el.height + 'px';
         };
         Dialog.prototype.fitDialog = function () {
             var D = document;
             var el = document.body.getElementsByClassName('growthmessage-dialog__inner')[0];
-            el.style.width = Math.max(D.body.clientWidth, D.documentElement.clientWidth) + 'px';
-            el.style.height = Math.min(D.body.clientHeight, D.documentElement.clientHeight) + 'px';
-            el.style.top = Math.max(window.pageYOffset, D.documentElement.scrollTop) + 'px';
+            el.width = Math.max(D.body.clientWidth, D.documentElement.clientWidth);
+            el.style.width = el.style.width + 'px';
+            el.height = Math.min(D.body.clientHeight, D.documentElement.clientHeight);
+            el.style.height = el.height + 'px';
+            el.top = Math.max(window.pageYOffset, D.documentElement.scrollTop);
+            el.style.top = el.top + 'px';
+        };
+        Dialog.prototype.scaleDialog = function () {
+            var el = document.body.getElementsByClassName('growthmessage-dialog__inner')[0];
+            setTimeout(function () {
+                var D = document;
+                var height = Math.min(D.body.clientHeight, D.documentElement.clientHeight);
+                if (el.offsetHeight <= height)
+                    return;
+                el.style.transform = 'scale(' + (height / el.offsetHeight * 0.85) + ')';
+                el.style.transformOrigin = 'center top';
+                el.style.top = el.top + height * 0.075 + 'px';
+            }, 100);
         };
         return Dialog;
     })(GrowthMessage.Events);
@@ -241,7 +259,7 @@ var GrowthMessage;
 })(GrowthMessage || (GrowthMessage = {}));
 
 if(GrowthMessage.module){
-GrowthMessage.module.exports("styles.css", ".growthmessage-dialog{position:absolute;top:0px;left:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.9)}.growthmessage-dialog__inner{position:absolute;top:0px;left:0px;width:100%;height:100%;display:table}.growthmessage-dialog__margin-left,.growthmessage-dialog__margin-right{display:table-cell;width:7.5%}.growthmessage-dialog__contents{display:table-cell;width:85%;vertical-align:middle}.growthmessage-dialog-text{display:table;table-layout:fixed;box-sizing:border-box;overflow:hidden;width:100%;background-color:#eaeaea;border-top:1px solid #fff;border-radius:10px}.growthmessage-dialog-text__title{margin:21px 14px 7px 14px;text-align:center;word-wrap:break-word;line-height:42px;font-size:20px;font-weight:bold}.growthmessage-dialog-text__body{margin:7px 21px 28px 21px;text-align:center;word-wrap:break-word;line-height:24px;font-size:16px}.growthmessage-dialog-text__buttons{display:table;table-layout:fixed;width:100%;border-top:1px solid #b4b4b4}.growthmessage-dialog-text__button{display:table-cell;box-sizing:border-box;padding:14px 7px;border-right:1px solid #b4b4b4;text-align:center;vertical-align:middle;word-wrap:break-word;font-size:20px;color:#1678e5}.growthmessage-dialog-text__button:hover{background:#efefef;font-weight:bold}.growthmessage-dialog-text__button:last-child{border-right:none}.growthmessage-dialog-image{position:relative;display:table;table-layout:fixed;box-sizing:border-box;width:100%;font-size:0}.growthmessage-dialog-image__bg{max-width:100%;max-height:100%}.growthmessage-dialog-image__buttons{position:absolute;bottom:0;left:0;width:100%;text-align:center;vertical-align:bottom}.growthmessage-dialog-image__button img{max-width:100%;max-height:100%}.growthmessage-dialog__button-close{position:absolute;top:0;right:0;transform:translate(50%, -50%);font-size:0}\n");
+GrowthMessage.module.exports("styles.css", ".growthmessage-dialog{position:absolute;top:0px;left:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.9)}.growthmessage-dialog__inner{position:absolute;top:0px;left:0px;width:100%;max-height:85%;display:table}.growthmessage-dialog__margin-left,.growthmessage-dialog__margin-right{display:table-cell;width:7.5%}.growthmessage-dialog__contents{display:table-cell;width:85%;vertical-align:middle}.growthmessage-dialog-text{display:table;table-layout:fixed;box-sizing:border-box;overflow:hidden;width:100%;background-color:#eaeaea;border-top:1px solid #fff;border-radius:10px}.growthmessage-dialog-text__title{margin:21px 14px 7px 14px;text-align:center;word-wrap:break-word;line-height:42px;font-size:20px;font-weight:bold}.growthmessage-dialog-text__body{margin:7px 21px 28px 21px;text-align:center;word-wrap:break-word;line-height:24px;font-size:16px}.growthmessage-dialog-text__buttons{display:table;table-layout:fixed;width:100%;border-top:1px solid #b4b4b4}.growthmessage-dialog-text__button{display:table-cell;box-sizing:border-box;padding:14px 7px;border-right:1px solid #b4b4b4;text-align:center;vertical-align:middle;word-wrap:break-word;font-size:20px;color:#1678e5}.growthmessage-dialog-text__button:hover{background:#efefef;font-weight:bold}.growthmessage-dialog-text__button:last-child{border-right:none}.growthmessage-dialog-image{position:relative;display:table;table-layout:fixed;box-sizing:border-box;width:100%;font-size:0}.growthmessage-dialog-image__bg{max-width:100%;max-height:100%}.growthmessage-dialog-image__buttons{position:absolute;bottom:0;left:0;width:100%;text-align:center;vertical-align:bottom}.growthmessage-dialog-image__button img{max-width:100%;max-height:100%}.growthmessage-dialog__button-close{position:absolute;top:0;right:0;transform:translate(50%, -50%);font-size:0}\n");
 GrowthMessage.module.exports("dialog-image.html", "<div class=\"growthmessage-dialog\">\n    <div class=\"growthmessage-dialog__inner\">\n        <div class=\"growthmessage-dialog__margin-left\"></div>\n        <div class=\"growthmessage-dialog__contents\">\n            <div class=\"growthmessage-dialog-image\">\n                <img src=\"{{=picture.url}}\" class=\"growthmessage-dialog-image__bg\">\n                <div class=\"growthmessage-dialog-image__buttons\">\n                    {{@buttons}}\n                        <div class=\"growthmessage-dialog-image__button\">\n                            <img src=\"{{=_val.picture.url}}\">\n                        </div>\n                    {{/@buttons}}\n                </div>\n                {{_close}}\n                    <img src=\"{{=_close.picture.url}}\" class=\"growthmessage-dialog__button-close\">\n                {{/_close}}\n            </div>\n        </div>\n        <div class=\"growthmessage-dialog__margin-right\"></div>\n    </div>\n</div>\n");
 GrowthMessage.module.exports("dialog-text.html", "<div class=\"growthmessage-dialog\">\n    <div class=\"growthmessage-dialog__inner\">\n        <div class=\"growthmessage-dialog__margin-left\"></div>\n        <div class=\"growthmessage-dialog__contents\">\n            <div class=\"growthmessage-dialog-text\">\n                <div class=\"growthmessage-dialog-text__title\">\n                    {{=caption}}\n                </div>\n                <div class=\"growthmessage-dialog-text__body\">\n                    {{=text}}\n                </div>\n                <div class=\"growthmessage-dialog-text__buttons\">\n                    {{@buttons}}\n                        <div class=\"growthmessage-dialog-text__button\">\n                            {{=_val.label}}\n                        </div>\n                    {{/@buttons}}\n                </div>\n            </div>\n        </div>\n        <div class=\"growthmessage-dialog__margin-right\"></div>\n    </div>\n</div>\n");
 }

@@ -18,6 +18,7 @@ module GrowthMessage {
             this.setElement();
             this.fitOverlay();
             this.fitDialog();
+            this.scaleDialog();
         }
         render(data:{type:string}) {
             var template = GrowthMessage.module.require(this.templates[data.type]);
@@ -43,27 +44,45 @@ module GrowthMessage {
         }
         fitOverlay() {
             var D = document;
-            this.el.style.width = Math.max(
+            this.el.width = Math.max(
                 D.body.scrollWidth, D.documentElement.scrollWidth,
                 D.body.offsetWidth, D.documentElement.offsetWidth,
                 D.body.clientWidth, D.documentElement.clientWidth
-            ) + 'px';
-            this.el.style.height = Math.max(
+            );
+            this.el.style.width = this.el.width + 'px';
+            this.el.height = Math.max(
                 D.body.scrollHeight, D.documentElement.scrollHeight,
                 D.body.offsetHeight, D.documentElement.offsetHeight,
                 D.body.clientHeight, D.documentElement.clientHeight
-            ) + 'px';
+            );
+            this.el.style.height = this.el.height + 'px';
         }
         fitDialog() {
             var D = document;
             var el:any = document.body.getElementsByClassName('growthmessage-dialog__inner')[0];
-            el.style.width = Math.max(
+            el.width = Math.max(
                 D.body.clientWidth, D.documentElement.clientWidth
-            ) + 'px';
-            el.style.height = Math.min(
+            );
+            el.style.width = el.style.width + 'px';
+            el.height = Math.min(
                 D.body.clientHeight, D.documentElement.clientHeight
-            ) + 'px';
-            el.style.top = Math.max(window.pageYOffset, D.documentElement.scrollTop) + 'px';
+            );
+            el.style.height = el.height + 'px';
+            el.top = Math.max(window.pageYOffset, D.documentElement.scrollTop);
+            el.style.top = el.top + 'px';
+        }
+        scaleDialog() {
+            var el:any = document.body.getElementsByClassName('growthmessage-dialog__inner')[0];
+            setTimeout(()=>{
+                var D = document;
+                var height = Math.min(
+                    D.body.clientHeight, D.documentElement.clientHeight
+                );
+                if( el.offsetHeight <= height ) return;
+                el.style.transform = 'scale(' + (height / el.offsetHeight * 0.85) + ')';
+                el.style.transformOrigin = 'center top';
+                el.style.top = el.top + height * 0.075 + 'px';
+            }, 100);
         }
     }
 }
