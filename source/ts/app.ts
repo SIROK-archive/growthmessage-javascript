@@ -31,7 +31,10 @@ module GrowthMessage {
             document.getElementsByTagName('head')[0].appendChild(el);
         }
         bindEvents() {
-            this.on('hook', 'open', this.dialog);
+            this.on('hook', 'open');
+        }
+        open() {
+            this.dialog.open(this.config.get());
         }
     }
 }

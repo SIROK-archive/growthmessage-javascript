@@ -4,21 +4,19 @@
 module GrowthMessage {
     export class Dialog extends GrowthMessage.Events {
         private parentElement:any;
+        private templates = {
+            'plain' : 'dialog-text.html',
+            'image' : 'dialog-image.html'
+        };
         constructor() {
             super();
         }
-        open() {
+        open(data:{type:string}) {
             this.parentElement = document.body.getElementsByClassName('growthmessage')[0];
-            this.render(GrowthMessage.module.require('dialog-text.html'), {
-                title : 'hogehoge',
-                body : 'fugafugafugafugafugafugafugafuga',
-                buttons : [
-                    {label : 'piyo'},
-                    {label : 'piyopiyo'}
-                ]
-            });
+            this.render(data);
         }
-        render(template:string, data:{}) {
+        render(data:{type:string}) {
+            var template = GrowthMessage.module.require(this.templates[data.type]);
             var html = new GrowthMessage.t(template).render(data);
             this.parentElement.innerHTML = html;
         }
