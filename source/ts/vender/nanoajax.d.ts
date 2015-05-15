@@ -1,3 +1,3 @@
 declare module GrowthMessage.nanoajax {
-    export function ajax(a:any, b?:any):any
+    export function ajax(params:any, callback:(code:number, responseText:string)=>void):any
 }

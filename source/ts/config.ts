@@ -6,19 +6,19 @@ module GrowthMessage {
         private data = {};
         constructor(){
             super();
-            this.on('load', 'check');
+            this.on('load', 'set');
             this.load('/sample/json/image-2buttons.json');
         }
         load(url:string, params?:{}){
             GrowthMessage.nanoajax.ajax({
                 url: url,
                 method: 'GET'
-            }, ()=>{
-                this.trigger('load');
+            }, (code, responseText)=>{
+                this.trigger('load', JSON.parse(responseText));
             });
         }
-        check(){
-
+        set(responseText){
+            this.data = responseText;
         }
         get(){
             return this.data;

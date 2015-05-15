@@ -120,7 +120,7 @@ var GrowthMessage;
         function Config() {
             _super.call(this);
             this.data = {};
-            this.on('load', 'check');
+            this.on('load', 'set');
             this.load('/sample/json/image-2buttons.json');
         }
         Config.prototype.load = function (url, params) {
@@ -128,11 +128,12 @@ var GrowthMessage;
             GrowthMessage.nanoajax.ajax({
                 url: url,
                 method: 'GET'
-            }, function () {
-                _this.trigger('load');
+            }, function (code, responseText) {
+                _this.trigger('load', JSON.parse(responseText));
             });
         };
-        Config.prototype.check = function () {
+        Config.prototype.set = function (responseText) {
+            this.data = responseText;
         };
         Config.prototype.get = function () {
             return this.data;
