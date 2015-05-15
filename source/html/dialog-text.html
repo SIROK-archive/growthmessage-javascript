@@ -9,12 +9,11 @@
                 {{%body}}
             </div>
             <div class="growthmessage-dialog-text__buttons">
-                <div class="growthmessage-dialog-text__button">
-                    piyopiyo
-                </div>
-                <div class="growthmessage-dialog-text__button">
-                    piyopiyo
-                </div>
+                {{@buttons}}
+                    <div class="growthmessage-dialog-text__button">
+                        {{=_val.label}}
+                    </div>
+                {{/@buttons}}
             </div>
         </div>
     </div>

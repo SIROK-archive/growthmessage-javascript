@@ -11,7 +11,11 @@ module GrowthMessage {
             this.parentElement = document.body.getElementsByClassName('growthmessage')[0];
             this.render(GrowthMessage.module.require('dialog-text.html'), {
                 title : 'hogehoge',
-                body : 'fugafugafugafugafugafugafugafuga'
+                body : 'fugafugafugafugafugafugafugafuga',
+                buttons : [
+                    {label : 'piyo'},
+                    {label : 'piyopiyo'}
+                ]
             });
         }
         render(template:string, data:{}) {

@@ -46,6 +46,7 @@
         }
         &__buttons {
             display : table;
+            table-layout : fixed;
             width : 100%;
             border-top : 1px solid #b4b4b4;
         }
