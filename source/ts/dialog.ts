@@ -18,7 +18,6 @@ module GrowthMessage {
             this.setElement();
             this.fitOverlay();
             this.fitDialog();
-            this.scrollToTop();
         }
         render(data:{type:string}) {
             var template = GrowthMessage.module.require(this.templates[data.type]);
@@ -64,9 +63,7 @@ module GrowthMessage {
             el.style.height = Math.min(
                 D.body.clientHeight, D.documentElement.clientHeight
             ) + 'px';
-        }
-        scrollToTop() {
-            window.scrollTo(0, 1);
+            el.style.top = Math.max(window.pageYOffset, D.documentElement.scrollTop) + 'px';
         }
     }
 }

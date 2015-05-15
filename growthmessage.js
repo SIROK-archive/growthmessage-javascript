@@ -163,7 +163,6 @@ var GrowthMessage;
             this.setElement();
             this.fitOverlay();
             this.fitDialog();
-            this.scrollToTop();
         };
         Dialog.prototype.render = function (data) {
             var template = GrowthMessage.module.require(this.templates[data.type]);
@@ -199,9 +198,7 @@ var GrowthMessage;
             var el = document.body.getElementsByClassName('growthmessage-dialog__inner')[0];
             el.style.width = Math.max(D.body.clientWidth, D.documentElement.clientWidth) + 'px';
             el.style.height = Math.min(D.body.clientHeight, D.documentElement.clientHeight) + 'px';
-        };
-        Dialog.prototype.scrollToTop = function () {
-            window.scrollTo(0, 1);
+            el.style.top = Math.max(window.pageYOffset, D.documentElement.scrollTop) + 'px';
         };
         return Dialog;
     })(GrowthMessage.Events);
