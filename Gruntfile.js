@@ -52,8 +52,9 @@ module.exports = function(grunt){
                 files: [
                     './source/ts/*.ts',
                     './source/html/*.html',
+                    './source/scss/*.scss',
                 ],
-                tasks: ['typescript', 'tjs2GM', 'text2GM', 'uglify'],
+                tasks: ['sass', 'typescript', 'tjs2GM', 'text2GM', 'uglify'],
                 options: {
                     spawn: false,
                 },
@@ -64,6 +65,6 @@ module.exports = function(grunt){
     require('load-grunt-tasks')(grunt);
     grunt.loadTasks('./tasks');
 
-    grunt.registerTask('default', ['typescript', 'tjs2GM', 'text2GM', 'uglify']);
+    grunt.registerTask('default', ['sass', 'typescript', 'tjs2GM', 'text2GM', 'uglify']);
 
 };
