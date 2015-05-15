@@ -1,3 +1,4 @@
+/// <reference path="vender/nanoajax.d.ts" />
 /// <reference path="events.ts" />
 
 module GrowthMessage {
@@ -9,7 +10,12 @@ module GrowthMessage {
             this.load('/sample/json/image-2buttons.json');
         }
         load(url:string, params?:{}){
-            this.trigger('load');
+            GrowthMessage.nanoajax.ajax({
+                url: url,
+                method: 'GET'
+            }, ()=>{
+                this.trigger('load');
+            });
         }
         check(){
 

@@ -32,8 +32,8 @@ module.exports = function(grunt){
             src: './bower_components/t.js/t.min.js',
             dest: './growthmessage.js',
         },
-        pegasus2GM: {
-            src: './bower_components/pegasus/dist/pegasus.min.js',
+        nanoajax2GM: {
+            src: './bower_components/nanoajax/index.js',
             dest: './growthmessage.js',
         },
         text2GM: {
@@ -58,7 +58,7 @@ module.exports = function(grunt){
                     './source/html/*.html',
                     './source/scss/*.scss',
                 ],
-                tasks: ['sass', 'typescript', 'tjs2GM', 'text2GM', 'uglify'],
+                tasks: ['sass', 'typescript', 'tjs2GM', 'nanoajax2GM', 'text2GM', 'uglify'],
                 options: {
                     spawn: false,
                 },
@@ -69,6 +69,6 @@ module.exports = function(grunt){
     require('load-grunt-tasks')(grunt);
     grunt.loadTasks('./tasks');
 
-    grunt.registerTask('default', ['sass', 'typescript', 'tjs2GM', 'pegasus2GM', 'text2GM', 'uglify']);
+    grunt.registerTask('default', ['sass', 'typescript', 'tjs2GM', 'nanoajax2GM', 'text2GM', 'uglify']);
 
 };

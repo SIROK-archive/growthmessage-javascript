@@ -1,5 +1,47 @@
-var GrowthMessage;(function(GrowthMessage){//0.3.0
-function pegasus(a,b){return b=new XMLHttpRequest,b.open("GET",a),a=[],b.onreadystatechange=b.then=function(c,d,e){if(c&&c.call&&(a=[,c,d]),4==b.readyState&&(e=a[0|b.status/200]))try{e(JSON.parse(b.responseText),b)}catch(f){e(null,b)}},b.send(),b}GrowthMessage.pegasus=pegasus;}(GrowthMessage || (GrowthMessage = {})));
+var GrowthMessage;(function(global, exports){exports.ajax = function (params, callback) {
+  if (typeof params == 'string') params = {url: params}
+  var headers = params.headers || {}
+    , body = params.body
+    , method = params.method || (body ? 'POST' : 'GET')
+    , withCredentials = params.withCredentials || false
+
+  var req = getRequest()
+
+  // has no effect in IE
+  // has no effect for same-origin requests
+  // has no effect in CORS if user has disabled 3rd party cookies
+  req.withCredentials = withCredentials
+
+  req.onreadystatechange = function () {
+    if (req.readyState == 4)
+      callback(req.status, req.responseText, req)
+  }
+
+  if (body) {
+    setDefault(headers, 'X-Requested-With', 'XMLHttpRequest')
+    setDefault(headers, 'Content-Type', 'application/x-www-form-urlencoded')
+  }
+
+  req.open(method, params.url, true)
+
+  for (var field in headers)
+    req.setRequestHeader(field, headers[field])
+
+  req.send(body)
+}
+
+function getRequest() {
+  if (global.XMLHttpRequest)
+    return new global.XMLHttpRequest;
+  else
+    try { return new global.ActiveXObject("MSXML2.XMLHTTP.3.0"); } catch(e) {}
+  throw new Error('no xmlhttp request able to be created')
+}
+
+function setDefault(obj, key, value) {
+  obj[key] = obj[key] || value
+}
+GrowthMessage.nanoajax=exports;}(window, GrowthMessage || (GrowthMessage = {})));
 var GrowthMessage;(function(window){function c(a){this.t=a}function l(a,b){for(var e=b.split(".");e.length;){if(!(e[0]in a))return!1;a=a[e.shift()]}return a}function d(a,b){return a.replace(h,function(e,a,i,f,c,h,k,m){var f=l(b,f),j="",g;if(!f)return"!"==i?d(c,b):k?d(m,b):"";if(!i)return d(h,b);if("@"==i){e=b._key;a=b._val;for(g in f)f.hasOwnProperty(g)&&(b._key=g,b._val=f[g],j+=d(c,b));b._key=e;b._val=a;return j}}).replace(k,function(a,c,d){return(a=l(b,d))||0===a?"%"==c?(new Option(a)).innerHTML.replace(/"/g,"&quot;"):
 a:""})}var h=/\{\{(([@!]?)(.+?))\}\}(([\s\S]+?)(\{\{:\1\}\}([\s\S]+?))?)\{\{\/\1\}\}/g,k=/\{\{([=%])(.+?)\}\}/g;c.prototype.render=function(a){return d(this.t,a)};window.t=c})(GrowthMessage || (GrowthMessage = {}));
 var GrowthMessage;
@@ -69,6 +111,7 @@ var GrowthMessage;
     })(GrowthMessage.Events);
     GrowthMessage.App = App;
 })(GrowthMessage || (GrowthMessage = {}));
+/// <reference path="vender/nanoajax.d.ts" />
 /// <reference path="events.ts" />
 var GrowthMessage;
 (function (GrowthMessage) {
@@ -81,7 +124,13 @@ var GrowthMessage;
             this.load('/sample/json/image-2buttons.json');
         }
         Config.prototype.load = function (url, params) {
-            this.trigger('load');
+            var _this = this;
+            GrowthMessage.nanoajax.ajax({
+                url: url,
+                method: 'GET'
+            }, function () {
+                _this.trigger('load');
+            });
         };
         Config.prototype.check = function () {
         };
