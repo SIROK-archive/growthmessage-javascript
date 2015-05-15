@@ -17,8 +17,22 @@ module GrowthMessage {
         }
         render(data:{type:string}) {
             var template = GrowthMessage.module.require(this.templates[data.type]);
-            var html = new GrowthMessage.t(template).render(data);
+            var html = new GrowthMessage.t(template).render(this.filter(data));
             this.parentElement.innerHTML = html;
+        }
+        filter(data:any):{} {
+            var newButtons = [];
+            data.buttons.forEach((button, index)=>{
+                if( button.type==='screen' ){
+                    data._screen = button;
+                } else if( button.type==='close' ) {
+                    data._close = button;
+                } else {
+                    newButtons.push(button);
+                }
+            });
+            data.buttons = newButtons;
+            return data;
         }
     }
 }
