@@ -82,7 +82,6 @@ var GrowthMessage;
             _super.call(this);
             this.config = new GrowthMessage.Config();
             this.dialog = new GrowthMessage.Dialog();
-            this.overlay = new GrowthMessage.Overlay();
             this.userAgent = new GrowthMessage.UserAgent();
             if (!this.userAgent.isViewable())
                 return;
@@ -201,18 +200,6 @@ var GrowthMessage;
         return Module;
     })();
     GrowthMessage.module = new Module();
-})(GrowthMessage || (GrowthMessage = {}));
-/// <reference path="events.ts" />
-var GrowthMessage;
-(function (GrowthMessage) {
-    var Overlay = (function (_super) {
-        __extends(Overlay, _super);
-        function Overlay() {
-            _super.call(this);
-        }
-        return Overlay;
-    })(GrowthMessage.Events);
-    GrowthMessage.Overlay = Overlay;
 })(GrowthMessage || (GrowthMessage = {}));
 /// <reference path="events.ts" />
 var GrowthMessage;

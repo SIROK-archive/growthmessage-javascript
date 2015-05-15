@@ -6,7 +6,6 @@ module GrowthMessage {
         el:any;
         config = new GrowthMessage.Config();
         dialog = new GrowthMessage.Dialog();
-        overlay = new GrowthMessage.Overlay();
         userAgent = new GrowthMessage.UserAgent();
 
         constructor(options:{id:string}) {
