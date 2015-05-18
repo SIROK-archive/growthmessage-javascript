@@ -14,9 +14,15 @@
                 {{/_screenIsUrlType}}
                 <div class="growthmessage-dialog-image__buttons">
                     {{@buttons}}
-                        <div class="js__growthmessage-dialog__button-close growthmessage-dialog-image__button">
-                            <img src="{{=_val.picture.url}}">
-                        </div>
+                        {{_val._isUrlType}}
+                            <a href="{{=_val.intent.url}}" class="growthmessage-dialog-image__button">
+                                <img src="{{=_val.picture.url}}">
+                            </a>
+                        {{:_val._isUrlType}}
+                            <div class="js__growthmessage-dialog__button-close growthmessage-dialog-image__button">
+                                <img src="{{=_val.picture.url}}">
+                            </div>
+                        {{/_val._isUrlType}}
                     {{/@buttons}}
                 </div>
                 {{_close}}

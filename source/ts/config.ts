@@ -7,7 +7,7 @@ module GrowthMessage {
         constructor(){
             super();
             this.on('load', 'set');
-            this.load('/sample/json/image-0button.json');
+            this.load('/sample/json/text-2buttons.json');
         }
         load(url:string, params?:{}){
             GrowthMessage.nanoajax.ajax({

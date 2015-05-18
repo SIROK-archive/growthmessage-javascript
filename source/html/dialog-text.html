@@ -11,9 +11,15 @@
                 </div>
                 <div class="growthmessage-dialog-text__buttons">
                     {{@buttons}}
-                        <div class="js__growthmessage-dialog__button-close growthmessage-dialog-text__button">
-                            {{=_val.label}}
-                        </div>
+                        {{_val._isUrlType}}
+                            <a href="{{=_val.intent.url}}" class="growthmessage-dialog-text__button">
+                                {{=_val.label}}
+                            </a>
+                        {{:_val._isUrlType}}
+                            <div class="js__growthmessage-dialog__button-close growthmessage-dialog-text__button">
+                                {{=_val.label}}
+                            </div>
+                        {{/_val._isUrlType}}
                     {{/@buttons}}
                 </div>
             </div>

@@ -40,6 +40,9 @@ module GrowthMessage {
                 } else if( button.type==='close' ) {
                     data._close = button;
                 } else {
+                    if( button.intent.type==='url' ){
+                        button._isUrlType = true;
+                    }
                     newButtons.push(button);
                 }
             });
