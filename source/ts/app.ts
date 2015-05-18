@@ -15,6 +15,9 @@ module GrowthMessage {
             this.render();
             this.setStyles();
             this.bindEvents();
+            setTimeout(()=>{
+                this.trigger('hook');
+            }, 500);
         }
         render() {
             var el = document.createElement('div');

@@ -58,7 +58,8 @@ module GrowthMessage {
         animateForOpen(delay:number = 0) {
             setTimeout(()=>{
                 var el:any = document.body.getElementsByClassName('growthmessage-dialog__contents')[0];
-                el.style.transform = 'scale(1)';
+                el.style['transform'] = 'scale(1)';
+                el.style['-webkit-transform'] = 'scale(1)';
                 this.el.style.opacity = 1;
             }, delay);
         }
@@ -108,7 +109,8 @@ module GrowthMessage {
             }, 100);
         }
         bindEvents() {
-            this.el.addEventListener('click', (e)=>{
+            var eventName = ('ontouchstart' in window) ? 'touchend' : 'click';
+            this.el.addEventListener(eventName, (e)=>{
                 if( !this.hasClass(e.target, 'js__growthmessage-dialog__button-close') ) return;
                 this.animateForClose();
                 this.hide(300);
