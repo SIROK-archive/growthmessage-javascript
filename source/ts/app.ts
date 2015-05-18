@@ -15,7 +15,7 @@ module GrowthMessage {
             this.render();
             this.setStyles();
             this.bindEvents();
-            this.config.load('/sample/json/image-0button.json');
+            this.config.load('/sample/json/image-2buttons.json');
         }
         render() {
             var el = document.createElement('div');
