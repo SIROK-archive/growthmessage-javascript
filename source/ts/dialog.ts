@@ -34,6 +34,9 @@ module GrowthMessage {
             data.buttons.forEach((button, index)=>{
                 if( button.type==='screen' ){
                     data._screen = button;
+                    if( button.intent.type==='url' ){
+                        data._screenIsUrlType = true;
+                    }
                 } else if( button.type==='close' ) {
                     data._close = button;
                 } else {

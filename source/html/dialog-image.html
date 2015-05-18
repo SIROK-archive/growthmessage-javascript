@@ -3,15 +3,15 @@
         <div class="growthmessage-dialog__margin-left"></div>
         <div class="growthmessage-dialog__contents">
             <div class="growthmessage-dialog-image">
-                {{_screen}}
-                    <a href="" class="js__growthmessage-dialog__button-close growthmessage-dialog-image__bg">
+                {{_screenIsUrlType}}
+                    <a href="{{=_screen.intent.url}}" class="growthmessage-dialog-image__bg">
                         <img src="{{=picture.url}}">
                     </a>
-                {{:_screen}}
-                    <div class="growthmessage-dialog-image__bg">
+                {{:_screenIsUrlType}}
+                    <div class="{{_screen}}js__growthmessage-dialog__button-close{{/_screen}} growthmessage-dialog-image__bg">
                         <img src="{{=picture.url}}">
                     </div>
-                {{/_screen}}
+                {{/_screenIsUrlType}}
                 <div class="growthmessage-dialog-image__buttons">
                     {{@buttons}}
                         <div class="js__growthmessage-dialog__button-close growthmessage-dialog-image__button">
