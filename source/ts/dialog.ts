@@ -89,8 +89,11 @@ module GrowthMessage {
             }, 100);
         }
         bindEvents() {
-            this.el.getElementsByClassName('js__btn-close')[0].addEventListener('click', ()=>{
-                this.hide();
+            var els = this.el.getElementsByClassName('js__growthmessage-dialog__button-close');
+            [].slice.call(els).forEach((el)=>{
+                el.addEventListener('click', ()=>{
+                    this.hide();
+                });
             });
         }
     }
