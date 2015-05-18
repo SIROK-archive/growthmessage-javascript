@@ -20,6 +20,9 @@ module GrowthMessage {
             this.fitDialog();
             this.scaleDialog();
             this.bindEvents();
+            setTimeout(()=>{
+                this.animateForOpen();
+            }, 100);
         }
         hide() {
             this.parentElement.innerHTML = '';
@@ -51,6 +54,14 @@ module GrowthMessage {
         }
         setElement() {
             this.el = document.body.getElementsByClassName('growthmessage-dialog')[0];
+        }
+        animateForOpen() {
+            var el:any = document.body.getElementsByClassName('growthmessage-dialog__contents')[0];
+            el.style.transform = 'scale(1)';
+            this.el.style.opacity = 1;
+        }
+        animateForClose() {
+            this.el.style.opacity = 0;
         }
         fitOverlay() {
             var D = document;
@@ -98,7 +109,10 @@ module GrowthMessage {
             var els = this.el.getElementsByClassName('js__growthmessage-dialog__button-close');
             [].slice.call(els).forEach((el)=>{
                 el.addEventListener('click', ()=>{
-                    this.hide();
+                    this.animateForClose();
+                    setTimeout(()=>{
+                        this.hide();
+                    }, 300);
                 });
             });
         }
