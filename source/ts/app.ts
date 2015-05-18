@@ -15,9 +15,7 @@ module GrowthMessage {
             this.render();
             this.setStyles();
             this.bindEvents();
-            setTimeout(()=>{
-                this.trigger('hook');
-            }, 500);
+            this.config.load('/sample/json/image-0button.json');
         }
         render() {
             var el = document.createElement('div');
@@ -34,6 +32,7 @@ module GrowthMessage {
         }
         bindEvents() {
             this.on('hook', 'open');
+            this.config.on('set', 'open', this);
         }
         open() {
             this.dialog.open(this.config.get());

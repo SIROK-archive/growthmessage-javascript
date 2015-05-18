@@ -79,7 +79,6 @@ var GrowthMessage;
     var App = (function (_super) {
         __extends(App, _super);
         function App(options) {
-            var _this = this;
             _super.call(this);
             this.config = new GrowthMessage.Config();
             this.dialog = new GrowthMessage.Dialog();
@@ -90,9 +89,7 @@ var GrowthMessage;
             this.render();
             this.setStyles();
             this.bindEvents();
-            setTimeout(function () {
-                _this.trigger('hook');
-            }, 500);
+            this.config.load('/sample/json/image-0button.json');
         }
         App.prototype.render = function () {
             var el = document.createElement('div');
@@ -109,6 +106,7 @@ var GrowthMessage;
         };
         App.prototype.bindEvents = function () {
             this.on('hook', 'open');
+            this.config.on('set', 'open', this);
         };
         App.prototype.open = function () {
             this.dialog.open(this.config.get());
@@ -126,7 +124,6 @@ var GrowthMessage;
         function Config() {
             _super.call(this);
             this.on('load', 'set');
-            this.load('/sample/json/text-2buttons.json');
         }
         Config.prototype.load = function (url, params) {
             var _this = this;
