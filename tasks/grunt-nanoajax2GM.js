@@ -5,7 +5,9 @@ module.exports = function(grunt) {
         var src = grunt.file.read(config.src);
         var dest = grunt.file.read(config.dest);
         src = 'var GrowthMessage;(function(global, exports){' +
-            src +
+            src
+                .replace(/  req\.withCredentials = withCredentials\n/, '')
+                .replace(/(req\.open\(.+?\))/, '$1\n  req.withCredentials = withCredentials') +
             'GrowthMessage.nanoajax=exports;}(window, GrowthMessage || (GrowthMessage = {})));';
         grunt.file.write(config.dest, src + "\n" + dest);
     });
