@@ -69,7 +69,6 @@ module GrowthMessage {
         fitOverlay() {
             var D = document;
             this.el.width = Math.max(
-                D.body.scrollWidth, D.documentElement.scrollWidth,
                 D.body.offsetWidth, D.documentElement.offsetWidth,
                 D.body.clientWidth, D.documentElement.clientWidth
             );
