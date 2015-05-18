@@ -19,6 +19,10 @@ module GrowthMessage {
             this.fitOverlay();
             this.fitDialog();
             this.scaleDialog();
+            this.bindEvents();
+        }
+        hide() {
+            this.parentElement.innerHTML = '';
         }
         render(data:{type:string}) {
             var template = GrowthMessage.module.require(this.templates[data.type]);
@@ -83,6 +87,11 @@ module GrowthMessage {
                 el.style.transformOrigin = 'center top';
                 el.style.top = el.top + height * 0.075 + 'px';
             }, 100);
+        }
+        bindEvents() {
+            this.el.getElementsByClassName('js__btn-close')[0].addEventListener('click', ()=>{
+                this.hide();
+            });
         }
     }
 }
