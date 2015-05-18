@@ -158,7 +158,6 @@ var GrowthMessage;
             };
         }
         Dialog.prototype.open = function (data) {
-            var _this = this;
             this.parentElement = document.body.getElementsByClassName('growthmessage')[0];
             this.render(data);
             this.setElement();
@@ -166,9 +165,7 @@ var GrowthMessage;
             this.fitDialog();
             this.scaleDialog();
             this.bindEvents();
-            setTimeout(function () {
-                _this.animateForOpen();
-            }, 100);
+            this.animateForOpen(100);
         };
         Dialog.prototype.hide = function () {
             this.parentElement.innerHTML = '';
@@ -203,10 +200,14 @@ var GrowthMessage;
         Dialog.prototype.setElement = function () {
             this.el = document.body.getElementsByClassName('growthmessage-dialog')[0];
         };
-        Dialog.prototype.animateForOpen = function () {
-            var el = document.body.getElementsByClassName('growthmessage-dialog__contents')[0];
-            el.style.transform = 'scale(1)';
-            this.el.style.opacity = 1;
+        Dialog.prototype.animateForOpen = function (delay) {
+            var _this = this;
+            if (delay === void 0) { delay = 0; }
+            setTimeout(function () {
+                var el = document.body.getElementsByClassName('growthmessage-dialog__contents')[0];
+                el.style.transform = 'scale(1)';
+                _this.el.style.opacity = 1;
+            }, delay);
         };
         Dialog.prototype.animateForClose = function () {
             this.el.style.opacity = 0;
