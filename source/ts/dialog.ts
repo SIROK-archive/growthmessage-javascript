@@ -22,8 +22,10 @@ module GrowthMessage {
             this.bindEvents();
             this.animateForOpen(100);
         }
-        hide() {
-            this.parentElement.innerHTML = '';
+        hide(delay:number = 0) {
+            setTimeout(()=>{
+                this.parentElement.innerHTML = '';
+            }, delay);
         }
         render(data:{type:string}) {
             var template = GrowthMessage.module.require(this.templates[data.type]);
@@ -106,15 +108,14 @@ module GrowthMessage {
             }, 100);
         }
         bindEvents() {
-            var els = this.el.getElementsByClassName('js__growthmessage-dialog__button-close');
-            [].slice.call(els).forEach((el)=>{
-                el.addEventListener('click', ()=>{
-                    this.animateForClose();
-                    setTimeout(()=>{
-                        this.hide();
-                    }, 300);
-                });
+            this.el.addEventListener('click', (e)=>{
+                if( !this.hasClass(e.target, 'js__growthmessage-dialog__button-close') ) return;
+                this.animateForClose();
+                this.hide(300);
             });
+        }
+        hasClass(el:any, name:string) {
+            return (el.className.split(' ').indexOf(name) >= 0);
         }
     }
 }
