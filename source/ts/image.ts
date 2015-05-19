@@ -11,10 +11,17 @@ module GrowthMessage {
             var unextracted = urls.length;
             if( !unextracted ) return;
             urls.forEach((url)=>{
+                var times = 3;
                 var img:any = document.createElement('img');
                 img.onload = ()=>{
                     if( --unextracted ) return;
                     this.trigger('load');
+                };
+                img.onerror = ()=>{
+                    if( --times ){
+                        img.src = '';
+                        img.src = url;
+                    }
                 };
                 img.src = url;
             });
