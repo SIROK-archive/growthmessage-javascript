@@ -90,6 +90,10 @@ var GrowthMessage;
             this.render();
             this.setStyles();
             this.bindEvents();
+            // For Debug
+            window.onhashchange = function () {
+                location.reload(false);
+            };
             this.config.load('/sample/json/' + location.hash.slice(1) + '.json');
         }
         App.prototype.render = function () {

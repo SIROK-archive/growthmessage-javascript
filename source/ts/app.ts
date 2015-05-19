@@ -16,6 +16,11 @@ module GrowthMessage {
             this.render();
             this.setStyles();
             this.bindEvents();
+
+            // For Debug
+            window.onhashchange = ()=>{
+                location.reload(false);
+            };
             this.config.load('/sample/json/' + location.hash.slice(1) + '.json');
         }
         render() {
