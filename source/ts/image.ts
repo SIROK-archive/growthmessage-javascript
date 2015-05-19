@@ -11,14 +11,14 @@ module GrowthMessage {
             var unextracted = urls.length;
             if( !unextracted ) return;
             urls.forEach((url)=>{
-                var times = 3;
+                var retriedTimes = 3;
                 var img:any = document.createElement('img');
                 img.onload = ()=>{
                     if( --unextracted ) return;
                     this.trigger('load');
                 };
                 img.onerror = ()=>{
-                    if( --times ){
+                    if( --retriedTimes ){
                         img.src = '';
                         img.src = url;
                     }

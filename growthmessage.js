@@ -288,7 +288,7 @@ var GrowthMessage;
             if (!unextracted)
                 return;
             urls.forEach(function (url) {
-                var times = 3;
+                var retriedTimes = 3;
                 var img = document.createElement('img');
                 img.onload = function () {
                     if (--unextracted)
@@ -296,7 +296,7 @@ var GrowthMessage;
                     _this.trigger('load');
                 };
                 img.onerror = function () {
-                    if (--times) {
+                    if (--retriedTimes) {
                         img.src = '';
                         img.src = url;
                     }
