@@ -1,35 +1,35 @@
-<div class="js__growthmessage-dialog__button-close growthmessage-dialog">
+<div class="{{_close}}{{=_closeBtnClass}}{{/_close}} growthmessage-dialog">
     <div class="growthmessage-dialog__inner">
-        <div class="js__growthmessage-dialog__button-close growthmessage-dialog__margin-left"></div>
-        <div class="js__growthmessage-dialog__button-close growthmessage-dialog__contents">
+        <div class="{{_close}}{{=_closeBtnClass}}{{/_close}} growthmessage-dialog__margin-left"></div>
+        <div class="{{_close}}{{=_closeBtnClass}}{{/_close}} growthmessage-dialog__contents">
             <div class="growthmessage-dialog-image">
                 {{_screenIsUrlType}}
                     <a href="{{=_screen.intent.url}}" class="growthmessage-dialog-image__bg">
-                        <img src="{{=picture.url}}">
+                        <img src="{{=picture.url}}" class="{{=_closeBtnClass}}">
                     </a>
                 {{:_screenIsUrlType}}
                     <div class="growthmessage-dialog-image__bg">
-                        <img src="{{=picture.url}}" class="{{_screen}}js__growthmessage-dialog__button-close{{/_screen}}">
+                        <img src="{{=picture.url}}" class="{{_screen}}{{=_closeBtnClass}}{{/_screen}}">
                     </div>
                 {{/_screenIsUrlType}}
                 <div class="growthmessage-dialog-image__buttons">
                     {{@buttons}}
                         {{_val._isUrlType}}
                             <a href="{{=_val.intent.url}}" class="growthmessage-dialog-image__button">
-                                <img src="{{=_val.picture.url}}" class="js__growthmessage-dialog__button-close">
+                                <img src="{{=_val.picture.url}}" class="{{=_closeBtnClass}}">
                             </a>
                         {{:_val._isUrlType}}
                             <div class="growthmessage-dialog-image__button">
-                                <img src="{{=_val.picture.url}}" class="js__growthmessage-dialog__button-close">
+                                <img src="{{=_val.picture.url}}" class="{{=_closeBtnClass}}">
                             </div>
                         {{/_val._isUrlType}}
                     {{/@buttons}}
                 </div>
                 {{_close}}
-                    <img src="{{=_close.picture.url}}" class="js__growthmessage-dialog__button-close growthmessage-dialog__button-close">
+                    <img src="{{=_close.picture.url}}" class="{{=_closeBtnClass}} growthmessage-dialog__button-close">
                 {{/_close}}
             </div>
         </div>
-        <div class="js__growthmessage-dialog__button-close growthmessage-dialog__margin-right"></div>
+        <div class="{{_close}}{{=_closeBtnClass}}{{/_close}} growthmessage-dialog__margin-right"></div>
     </div>
 </div>

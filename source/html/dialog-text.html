@@ -1,7 +1,7 @@
-<div class="js__growthmessage-dialog__button-close growthmessage-dialog">
+<div class="growthmessage-dialog">
     <div class="growthmessage-dialog__inner">
-        <div class="js__growthmessage-dialog__button-close growthmessage-dialog__margin-left"></div>
-        <div class="js__growthmessage-dialog__button-close growthmessage-dialog__contents">
+        <div class="growthmessage-dialog__margin-left"></div>
+        <div class="growthmessage-dialog__contents">
             <div class="growthmessage-dialog-text">
                 <div class="growthmessage-dialog-text__title">
                     {{=caption}}
@@ -12,11 +12,11 @@
                 <div class="growthmessage-dialog-text__buttons">
                     {{@buttons}}
                         {{_val._isUrlType}}
-                            <a href="{{=_val.intent.url}}" class="growthmessage-dialog-text__button">
+                            <a href="{{=_val.intent.url}}" class="{{=_closeBtnClass}} growthmessage-dialog-text__button">
                                 {{=_val.label}}
                             </a>
                         {{:_val._isUrlType}}
-                            <div class="js__growthmessage-dialog__button-close growthmessage-dialog-text__button">
+                            <div class="{{=_closeBtnClass}} growthmessage-dialog-text__button">
                                 {{=_val.label}}
                             </div>
                         {{/_val._isUrlType}}
@@ -24,6 +24,6 @@
                 </div>
             </div>
         </div>
-        <div class="js__growthmessage-dialog__button-close growthmessage-dialog__margin-right"></div>
+        <div class="growthmessage-dialog__margin-right"></div>
     </div>
 </div>

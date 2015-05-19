@@ -50,6 +50,7 @@ module GrowthMessage {
                 }
             });
             data.buttons = newButtons;
+            data._closeBtnClass = 'js__growthmessage-dialog__button-close';
             return data;
         }
         setElement() {
