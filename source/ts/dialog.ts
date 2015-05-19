@@ -42,6 +42,7 @@ module GrowthMessage {
                     }
                 } else if( button.type==='close' ) {
                     data._close = button;
+                    data._closeElClass = 'js__growthmessage-dialog__element-close';
                 } else {
                     if( button.intent.type==='url' ){
                         button._isUrlType = true;
@@ -50,6 +51,7 @@ module GrowthMessage {
                 }
             });
             data.buttons = newButtons;
+            data._linkBtnClass = 'js__growthmessage-dialog__button-link';
             data._closeBtnClass = 'js__growthmessage-dialog__button-close';
             return data;
         }
@@ -64,8 +66,10 @@ module GrowthMessage {
                 this.el.style.opacity = 1;
             }, delay);
         }
-        animateForClose() {
-            this.el.style.opacity = 0;
+        animateForClose(delay:number = 0) {
+            setTimeout(()=>{
+                this.el.style.opacity = 0;
+            }, delay);
         }
         fitOverlay() {
             var D = document;
@@ -111,9 +115,12 @@ module GrowthMessage {
         bindEvents() {
             var eventName = ('ontouchstart' in window) ? 'touchend' : 'click';
             this.el.addEventListener(eventName, (e)=>{
-                if( !this.hasClass(e.target, 'js__growthmessage-dialog__button-close') ) return;
-                this.animateForClose();
-                this.hide(300);
+                var isElement = this.hasClass(e.target, 'js__growthmessage-dialog__element-close');
+                var isButton = this.hasClass(e.target, 'js__growthmessage-dialog__button-close');
+                var isLink = this.hasClass(e.target, 'js__growthmessage-dialog__button-link');
+                if( !isElement && !isButton && !isLink ) return;
+                this.animateForClose(isLink ? 400 : 0);
+                this.hide(isLink ? 700 : 300);
             });
         }
         hasClass(el:any, name:string) {
