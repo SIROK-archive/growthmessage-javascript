@@ -75,6 +75,7 @@
             text-decoration: none;
             font-size : 17px;
             color : #1678e5;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
 
             &:hover {
                 background: #efefef;
@@ -98,8 +99,12 @@
         &__bg {
             display: table-cell;
             width: 100%;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
             img {
-                width: 100%;
+                display: block;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 0;
             }
         }
         &__buttons {
@@ -114,9 +119,17 @@
         &__button {
             display: block;
             width: 100%;
-            text-align: center;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+            &:hover {
+                opacity: 0.8;
+            }
+
             img {
-                width: 100%;
+                display: block;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 0;
             }
         }
 
@@ -129,6 +142,10 @@
         -webkit-transform: translate(50%, -50%) scale(0.5);
         transform: translate(50%, -50%) scale(0.5);
         font-size: 0;
+
+        &:hover {
+            opacity: 0.8;
+        }
     }
 
 }
