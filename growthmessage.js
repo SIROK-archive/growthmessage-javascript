@@ -90,7 +90,7 @@ var GrowthMessage;
             this.render();
             this.setStyles();
             this.bindEvents();
-            this.config.load('/sample/json/image-2buttons.json');
+            this.config.load('/sample/json/' + location.hash.slice(1) + '.json');
         }
         App.prototype.render = function () {
             var el = document.createElement('div');
@@ -285,8 +285,10 @@ var GrowthMessage;
             var _this = this;
             var urls = this.extractImageUrls(config, []);
             var unextracted = urls.length;
-            if (!unextracted)
+            if (!unextracted) {
+                this.trigger('load');
                 return;
+            }
             urls.forEach(function (url) {
                 var retriedTimes = 3;
                 var img = document.createElement('img');

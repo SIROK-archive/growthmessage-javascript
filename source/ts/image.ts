@@ -9,7 +9,10 @@ module GrowthMessage {
         load(config:{}){
             var urls = this.extractImageUrls(config, []);
             var unextracted = urls.length;
-            if( !unextracted ) return;
+            if( !unextracted ){
+                this.trigger('load');
+                return;
+            }
             urls.forEach((url)=>{
                 var retriedTimes = 3;
                 var img:any = document.createElement('img');
