@@ -6,6 +6,7 @@ module GrowthMessage {
         el:any;
         config = new GrowthMessage.Config();
         dialog = new GrowthMessage.Dialog();
+        image = new GrowthMessage.Image();
         userAgent = new GrowthMessage.UserAgent();
 
         constructor(options:{id:string}) {
@@ -32,7 +33,11 @@ module GrowthMessage {
         }
         bindEvents() {
             this.on('hook', 'open');
-            this.config.on('set', 'open', this);
+            this.config.on('set', 'loadImages', this);
+            this.image.on('load', 'open', this);
+        }
+        loadImages() {
+            this.image.load(this.config.get());
         }
         open() {
             this.dialog.open(this.config.get());

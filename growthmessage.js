@@ -82,6 +82,7 @@ var GrowthMessage;
             _super.call(this);
             this.config = new GrowthMessage.Config();
             this.dialog = new GrowthMessage.Dialog();
+            this.image = new GrowthMessage.Image();
             this.userAgent = new GrowthMessage.UserAgent();
             if (!this.userAgent.isViewable())
                 return;
@@ -106,7 +107,11 @@ var GrowthMessage;
         };
         App.prototype.bindEvents = function () {
             this.on('hook', 'open');
-            this.config.on('set', 'open', this);
+            this.config.on('set', 'loadImages', this);
+            this.image.on('load', 'open', this);
+        };
+        App.prototype.loadImages = function () {
+            this.image.load(this.config.get());
         };
         App.prototype.open = function () {
             this.dialog.open(this.config.get());
@@ -267,6 +272,46 @@ var GrowthMessage;
         return Dialog;
     })(GrowthMessage.Events);
     GrowthMessage.Dialog = Dialog;
+})(GrowthMessage || (GrowthMessage = {}));
+/// <reference path="events.ts" />
+var GrowthMessage;
+(function (GrowthMessage) {
+    var Image = (function (_super) {
+        __extends(Image, _super);
+        function Image() {
+            _super.call(this);
+        }
+        Image.prototype.load = function (config) {
+            var _this = this;
+            var urls = this.extractImageUrls(config, []);
+            var unextracted = urls.length;
+            if (!unextracted)
+                return;
+            urls.forEach(function (url) {
+                var img = document.createElement('img');
+                img.onload = function () {
+                    if (--unextracted)
+                        return;
+                    _this.trigger('load');
+                };
+                img.src = url;
+            });
+        };
+        Image.prototype.extractImageUrls = function (input, output) {
+            var _this = this;
+            Object.keys(input).forEach(function (key) {
+                if (key === 'picture') {
+                    output.push(input[key].url);
+                }
+                else if (input[key] instanceof Object) {
+                    output = _this.extractImageUrls(input[key], output);
+                }
+            });
+            return output;
+        };
+        return Image;
+    })(GrowthMessage.Events);
+    GrowthMessage.Image = Image;
 })(GrowthMessage || (GrowthMessage = {}));
 var GrowthMessage;
 (function (GrowthMessage) {
