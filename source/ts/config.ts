@@ -13,6 +13,10 @@ module GrowthMessage {
                 url: url,
                 method: 'GET'
             }, (code:number, responseText:string)=>{
+                if( code!==200 ){
+                    this.trigger('error');
+                    return;
+                }
                 this.trigger('load', JSON.parse(responseText));
             });
         }

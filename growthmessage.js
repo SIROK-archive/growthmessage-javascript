@@ -131,6 +131,10 @@ var GrowthMessage;
                 url: url,
                 method: 'GET'
             }, function (code, responseText) {
+                if (code !== 200) {
+                    _this.trigger('error');
+                    return;
+                }
                 _this.trigger('load', JSON.parse(responseText));
             });
         };
