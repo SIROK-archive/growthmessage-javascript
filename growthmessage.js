@@ -272,8 +272,8 @@ var GrowthMessage;
                 var isLink = _this.hasClass(e.target, 'js__growthmessage-dialog__button-link');
                 if (!isElement && !isButton && !isLink)
                     return;
-                _this.animateForClose(isLink ? 400 : 0);
-                _this.hide(isLink ? 700 : 300);
+                _this.animateForClose(isLink ? 600 : 0);
+                _this.hide(isLink ? 1000 : 300);
             });
         };
         Dialog.prototype.hasClass = function (el, name) {

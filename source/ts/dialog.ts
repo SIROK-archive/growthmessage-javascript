@@ -119,8 +119,8 @@ module GrowthMessage {
                 var isButton = this.hasClass(e.target, 'js__growthmessage-dialog__button-close');
                 var isLink = this.hasClass(e.target, 'js__growthmessage-dialog__button-link');
                 if( !isElement && !isButton && !isLink ) return;
-                this.animateForClose(isLink ? 400 : 0);
-                this.hide(isLink ? 700 : 300);
+                this.animateForClose(isLink ? 600 : 0);
+                this.hide(isLink ? 1000 : 300);
             });
         }
         hasClass(el:any, name:string) {
