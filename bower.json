@@ -1,0 +1,19 @@
+{
+  "name": "growthmessage-javascript",
+  "version": "0.1.0",
+  "homepage": "https://github.com/SIROK/growthmessage-javascript",
+  "authors": "SIROK, Ink.",
+  "main" : "growthmessage.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "npm-debug.log",
+    "tsconfig.json",
+    "css"
+  ],
+  "dependencies": {
+    "t.js": "git@github.com:jasonmoo/t.js.git",
+    "nanoajax": "git@github.com:yanatan16/nanoajax.git"
+  }
+}
